@@ -1,4 +1,4 @@
-<img src=“image.png” alt="app UI" width="300"/>
+<img src="image.png" alt="app UI" width="300"/>
 
 # **Project Name**:
 
