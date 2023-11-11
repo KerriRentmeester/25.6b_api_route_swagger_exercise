@@ -1,0 +1,136 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0", 
+        "title": "My Top Movie Project CRUD",
+        "description": "25.6b My User Project Application API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Movies",
+            "description": "API for users in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+
+    "paths": {
+        "/movies": {
+            "get": {
+                "tags": ["Movies"],
+                "summary": "Get all Movies in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Movie"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Movies"],
+                "description": "Create new movie in system",
+                "parameters": [
+                    {
+                        "name": "movie",
+                        "in": "body",
+                        "description": "RMovie to be added to the list of Top Movies",
+                        "schema": {
+                            "$ref": "#/definitions/Movie"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New movie has been added to the list of Top Movies",
+                        "schema": {
+                            "$ref": "#/definitions/Movie"
+                        }
+                    }
+                }
+            }
+        },
+        "/movie/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of movie to be deleted",
+                    "type": "integer"
+                }
+            ],
+            "delete": {
+                "tags": ["Movies"],
+                "summary": "Delete a movie from the list by ID",
+                "responses": {
+                    "200": {
+                        "description": "Movie removed successfully"
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Movies"],
+                "summary": "Update a movie in the list by ID",
+                "parameters": [
+                    {
+                        "name": "movie",
+                        "in": "body",
+                        "description": "Updated movie information",
+                        "schema": {
+                            "$ref": "#/definitions/Movie"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Movie updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/Movie"
+                        }
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Movie": {
+            "required": ["id","name"],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
